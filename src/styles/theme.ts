@@ -17,7 +17,7 @@ const theme: Theme & CustomVariantGroups = {
         success_400: "#008932",
         success_500: "#006726",
         success_600: "#00471A",
-        dark_300: "#8F959B",
+        dark_300: "text",
         dark_600: "#343E49",
         input_border: "#D7DDE9"
     },

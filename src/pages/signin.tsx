@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useRouter } from "next/router"
+
 import Image from "next/image"
 import {
     Flex,
@@ -21,13 +21,10 @@ const SignupPage = () => {
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
 
-    const router = useRouter()
-
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         // Perform signup logic here
         // For simplicity, let's just navigate to a success page
-        router.push("/success")
     }
 
     const handleGoogleSignIn = () => {
@@ -42,40 +39,52 @@ const SignupPage = () => {
 
             <Flex as="section" variant="signinRight">
                 <Heading as="h3" variant="styles.h3" sx={{ mb: "48px" }}>
-                    Join Wraft
+                    Sign in
                 </Heading>
 
                 <Box as="form" onSubmit={handleSubmit}>
-                    <Flex sx={{ gap: "16px", marginBottom: "24px" }}>
-                        <Box sx={{ flex: "1 1 264px" }}>
-                            <Label htmlFor="firstName">First Name</Label>
-                            <Input
-                                type="text"
-                                id="firstName"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                        </Box>
-                        <Box sx={{ flex: "1 1 auto" }}>
-                            <Label htmlFor="lastName">Last Name</Label>
-                            <Input
-                                type="text"
-                                id="lastName"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                        </Box>
+                    <Label htmlFor="firstName">Email</Label>
+                    <Input
+                        type="text"
+                        id="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        mb={"24px"}
+                    />
+
+                    <Label htmlFor="lastName">Password</Label>
+                    <Input
+                        type="text"
+                        id="lastName"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        mb={"12px"}
+                    />
+                    <Flex
+                        sx={{
+                            width: "100%",
+                            flexDirection: "row-reverse",
+                            position: "relative",
+                        }}>
+                        <Link
+                            href="/resetpassword"
+                            sx={{
+                                textDecoration: "none",
+                                color: "dark_300",
+                            }}>
+                            Forgot Password?
+                        </Link>
+                        <Button
+                            type="submit"
+                            sx={{
+                                position: "absolute",
+                                mr: "auto",
+                                top: "12px",
+                                left: "0",
+                            }}>
+                            Join waitlist
+                        </Button>
                     </Flex>
-                    <Box sx={{ marginBottom: "32px" }}>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </Box>
-                    <Button type="submit">Join waitlist</Button>
                 </Box>
 
                 <Divider
@@ -90,8 +99,8 @@ const SignupPage = () => {
                     Continue with Google
                 </Button>
 
-                <Text as="p" sx={{ mt: 4, color: "dark_600", mb: "4px" }}>
-                    Already a member?
+                <Text as="p" sx={{ mt: 5, color: "dark_600" }}>
+                    Not a user yet?
                     <Link
                         href="/signin"
                         sx={{
@@ -100,13 +109,7 @@ const SignupPage = () => {
                             fontWeight: "bold",
                             pl: 0,
                         }}>
-                        Sign in
-                    </Link>
-                </Text>
-                <Text as="p">
-                    By Joining the waiting list, I agree to Wraf&apos;s{" "}
-                    <Link href="" sx={{ color: "text" }}>
-                        Privacy Policy.
+                        Request invite
                     </Link>
                 </Text>
             </Flex>
