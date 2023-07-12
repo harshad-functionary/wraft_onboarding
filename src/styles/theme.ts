@@ -47,11 +47,13 @@ const theme: Theme & CustomVariantGroups = {
     //styles variant
 
     styles: {
+        
         h3: {
-          fontSize: 1,
-          fontFamily: "heading",
-          fontWeight: "heading",
-          color: "primary",
+            fontSize: 1,
+            fontFamily: "heading",
+            fontWeight: "heading",
+            color: "primary",
+            lineHeight: "heading",
         },
     },
 
@@ -109,24 +111,25 @@ const theme: Theme & CustomVariantGroups = {
 
     forms: {
         input: {
-          backgroundColor: "background",
-          color: "text",
-          border: "1px solid",
-          borderColor: "input_border",
-          borderRadius: "2px",
-          padding: "3px",
-          height: "42px",
-          "&:focus": {
-            outline: "none",
-            borderColor: "dark_300",
-          },
+            backgroundColor: "background",
+            color: "text",
+            border: "1px solid",
+            borderColor: "input_border",
+            borderRadius: "2px",
+            padding: "3px",
+            height: "42px",
+            "&:focus": {
+                outline: "none",
+                borderColor: "dark_300",
+            },
         },
         label: {
-          fontWeight: "body",
-          marginBottom: "4px",
+            fontSize: 0,
+            fontWeight: "body",
+            marginBottom: "4px",
         },
         button: {
-          variant: "googleLogin"
+            variant: "primary"
         },
       },
 }

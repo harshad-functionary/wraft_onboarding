@@ -11,6 +11,7 @@ import {
     Text,
     Link,
     Grid,
+    Divider,
 } from "theme-ui"
 import Logo from "../../public/Logo.svg"
 import GoogleLogo from "../../public/GoogleLogo.svg"
@@ -44,10 +45,7 @@ const SignupPage = () => {
                     Join Wraft
                 </Heading>
 
-                <Box
-                    as="form"
-                    onSubmit={handleSubmit}
-                    sx={{ marginBottom: "56px" }}>
+                <Box as="form" onSubmit={handleSubmit}>
                     <Flex sx={{ gap: "16px", marginBottom: "24px" }}>
                         <Box sx={{ flex: "1 1 264px" }}>
                             <Label htmlFor="firstName">First Name:</Label>
@@ -80,20 +78,36 @@ const SignupPage = () => {
                     <Button type="submit">Join waitlist</Button>
                 </Box>
 
+                <Divider
+                    sx={{
+                        margin: "56px 0",
+                        color: "rgba(0.141, 0.243, 0.286, 0.1)",
+                    }}
+                />
+
                 <Button onClick={handleGoogleSignIn} variant="googleLogin">
                     <Image src={GoogleLogo} alt="Google Logo" className="" />
                     Continue with Google
                 </Button>
 
-                <Text as="p" variant="" mt={4}>
+                <Text as="p" sx={{ mt: 4, color: "dark_600", mb: "4px" }}>
                     Already a member?{" "}
-                    <Link href="/signin" variant="">
+                    <Link
+                        href="/signin"
+                        sx={{
+                            textDecoration: "none",
+                            color: "dark_600",
+                            fontWeight: "bold",
+                            pl: 0,
+                        }}>
                         Sign in
                     </Link>
                 </Text>
-                <Text as="p" variant="">
+                <Text as="p">
                     By Joining the waiting list, I agree to Wraf&apos;s{" "}
-                    <Link href="">Privacy Policy.</Link>
+                    <Link href="" sx={{ color: "text" }}>
+                        Privacy Policy.
+                    </Link>
                 </Text>
             </Flex>
         </Grid>
