@@ -16,7 +16,7 @@ import {
 import Logo from "../../public/Logo.svg"
 import GoogleLogo from "../../public/GoogleLogo.svg"
 
-const SignupPage = () => {
+const SignUpPage = () => {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -114,4 +114,4 @@ const SignupPage = () => {
     )
 }
 
-export default SignupPage
+export default SignUpPage

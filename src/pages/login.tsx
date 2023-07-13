@@ -16,10 +16,9 @@ import {
 import Logo from "../../public/Logo.svg"
 import GoogleLogo from "../../public/GoogleLogo.svg"
 
-const SignupPage = () => {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
+const LoginPage = () => {
     const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -43,21 +42,21 @@ const SignupPage = () => {
                 </Heading>
 
                 <Box as="form" onSubmit={handleSubmit}>
-                    <Label htmlFor="firstName">Email</Label>
+                    <Label htmlFor="email">Email</Label>
                     <Input
                         type="text"
-                        id="firstName"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         mb={"24px"}
                     />
 
-                    <Label htmlFor="lastName">Password</Label>
+                    <Label htmlFor="password">Password</Label>
                     <Input
                         type="text"
-                        id="lastName"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         mb={"12px"}
                     />
                     <Flex
@@ -117,4 +116,4 @@ const SignupPage = () => {
     )
 }
 
-export default SignupPage
+export default LoginPage
