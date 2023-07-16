@@ -93,7 +93,7 @@ const SignUpPage = () => {
                 <Text as="p" sx={{ mt: 4, color: "dark_600", mb: "4px" }}>
                     Already a member?
                     <Link
-                        href="/signin"
+                        href="/login"
                         sx={{
                             textDecoration: "none",
                             color: "dark_600",

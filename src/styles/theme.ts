@@ -26,7 +26,7 @@ const theme: Theme & CustomVariantGroups = {
         heading: "inter,sans-serif",
         monospace: "Menlo, monospace",
     },
-    fontSizes: [15, 29],
+    fontSizes: [15, 29,45.8,18.75],
     space: [8, 9, 16, 24, 32, 36, 56, 80],
     radii: [4, 5],
     sizes: [574,629],
@@ -38,6 +38,8 @@ const theme: Theme & CustomVariantGroups = {
     lineHeights: {
         body: "24px",
         heading: "39px",
+        h1: "59.2px",
+        h5: "30px"
     },
     // letterSpacings: {
     //     body: "normal",
@@ -47,13 +49,25 @@ const theme: Theme & CustomVariantGroups = {
     //styles variant
 
     styles: {
-        
+        h1: {
+            fontSize: 2,
+            fontFamily: "heading",
+            fontWeight: "heading",
+            color: "dark_600",
+            lineHeight: "h1",
+        },
         h3: {
             fontSize: 1,
             fontFamily: "heading",
             fontWeight: "heading",
             color: "primary",
             lineHeight: "heading",
+        },
+        h5: {
+            fontSize: 3,
+            fontFamily: "heading",
+            fontWeight: "heading",
+            lineHeight: "h5",
         },
     },
 
