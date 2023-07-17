@@ -6,6 +6,7 @@ type CustomVariantGroups = {
     variants: {
       signinRight: Variant;
       signinGrid: Variant;
+      animate: Variant
     };
   };
 
@@ -121,6 +122,12 @@ const theme: Theme & CustomVariantGroups = {
             margin: 7,
             fontFamily: "body",
         },
+
+        animate: {
+            transitionProperty: 'all',
+            transitionTimingFunction: 'ease-out',
+            transitionDuration: '300ms',
+          },
     },
 
     forms: {
@@ -146,5 +153,6 @@ const theme: Theme & CustomVariantGroups = {
             variant: "primary"
         },
       },
+
 }
 export default theme

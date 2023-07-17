@@ -29,7 +29,7 @@ const LinkExpired = () => {
                     Your email is not verified yet. Please verify your email and
                     try again.
                 </Heading>
-                <Link href="/login">
+                <Link>
                     <Button>Resend verification link</Button>
                 </Link>
             </Flex>
