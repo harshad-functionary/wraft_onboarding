@@ -20,7 +20,12 @@ const theme: Theme & CustomVariantGroups = {
         success_600: "#00471A",
         dark_300: "text",
         dark_600: "#343E49",
-        input_border: "#D7DDE9"
+        input_border: "#D7DDE9",
+        info_400: "#007FA6",
+        error_400: "#D33E60",
+        warning_300: "#E3774C",
+        warning_500: "#88472E",
+        primary_500: "#3748CF"
     },
     fonts: {
         body: "inter,sans-serif",
@@ -83,6 +88,7 @@ const theme: Theme & CustomVariantGroups = {
             px: 2,
             fontSize: 0,
             lineHeight: "body",
+            cursor: "pointer",
             "&:hover": {
                 bg: "success_400",
             },
@@ -102,8 +108,38 @@ const theme: Theme & CustomVariantGroups = {
             justifyContent: "center",
             alignItems: "center",
             gap: 2,
-            width: "100%"
+            cursor: "pointer",
+            width: "100%",
+            "&:hover": {
+                bg: "transparent",
+            },
+            "&:focus": {
+                bg: "transparent"
+            },
           },
+        none:{
+            backgroundColor: "transparent",
+            color: "inherit",
+            padding: "0px",
+            border: "none",
+            outline: "none",
+            cursor: "pointer",
+            lineHeight: "0",
+            "&:hover": {
+                bg: "transparent",
+            },
+            "&:focus": {
+                bg: "transparent"
+            },
+        }
+      },
+
+    images: {
+        avatar: {
+          width: 31,
+          height: 31,
+          borderRadius: "50%",
+        },
       },
     
     variants: {
