@@ -77,7 +77,7 @@ const IndexPage = () => {
                             display: "flex",
                             alignItems: "center",
                         }}>
-                        <Button>New Document</Button>
+                        <Button sx={{ bg: "success_400" }}>New Document</Button>
                         <Flex
                             sx={{
                                 ml: "auto",
