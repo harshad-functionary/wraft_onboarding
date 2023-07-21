@@ -1,8 +1,20 @@
 import Image from "next/image"
+import { useState } from "react"
 import { Flex, Box, Heading, Button } from "theme-ui"
 import MailSend from "../../public/Group 164.svg"
+import EmailVerified from "./EmailVerified"
 
-const WaitlistPrompt = () => {
+const SignupVerification = () => {
+    const [verified, setVerified] = useState(false)
+
+    const handleClick = () => {
+        setVerified(true)
+    }
+
+    if (verified) {
+        return <EmailVerified />
+    }
+
     return (
         <Box
             as="main"
@@ -19,8 +31,8 @@ const WaitlistPrompt = () => {
                 <Heading
                     as="h1"
                     variant="styles.h1"
-                    sx={{ mt: "40px", mb: "8px" }}>
-                    Hang tight!
+                    sx={{ mt: "90px", mb: "8px" }}>
+                    Great!
                 </Heading>
                 <Heading
                     as="h5"
@@ -28,10 +40,10 @@ const WaitlistPrompt = () => {
                     sx={{ maxWidth: "376px", mb: "32px", textAlign: "center" }}>
                     We have sent a verification link to the registered email
                 </Heading>
-                <Button>Okay</Button>
+                <Button onClick={handleClick}>Okay</Button>
             </Flex>
         </Box>
     )
 }
 
-export default WaitlistPrompt
+export default SignupVerification

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, ChangeEvent, FormEvent } from "react"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import {
@@ -15,23 +15,64 @@ import {
 } from "theme-ui"
 import Logo from "../../public/Logo.svg"
 import GoogleLogo from "../../public/GoogleLogo.svg"
+import { useAppContext } from "../AppContext"
+import WaitlistPrompt from "@/components/WaitlistPrompt"
+import SignupVerification from "@/components/SignupVerificatin"
 
 const SignUpPage = () => {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
+    const { commonState, updateCommonState } = useAppContext()
+    const { firstName, lastName, email } = commonState
+    const [formData, setFormData] = useState({ firstName, lastName, email })
+
+    // State variable for conditional rendering
+    const [showSuccess, setShowSuccess] = useState(false)
+    const [showSuccess1, setShowSuccess1] = useState(false)
 
     const router = useRouter()
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Perform signup logic here
-        // For simplicity, let's just navigate to a success page
-        router.push("/success")
+    const updateShowSuccess1 = (newValue: boolean) => {
+        setShowSuccess1(newValue)
+    }
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target
+        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }))
+        // console.log(formData)
+    }
+
+    const handleSubmit = (event: FormEvent<HTMLDivElement>) => {
+        event.preventDefault()
+        console.log(email)
+        if (
+            isValidEmail(formData.email) &&
+            formData.firstName.length !== 0 &&
+            formData.lastName.length !== 0
+        ) {
+            updateCommonState(formData)
+            console.log(formData)
+            console.log(email)
+            console.log(commonState)
+            setShowSuccess(true)
+        } else {
+            alert("fill the inputs currectly")
+        }
+    }
+
+    const isValidEmail = (email: string): boolean => {
+        // Simple email validation using regular expression
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email)
     }
 
     const handleGoogleSignIn = () => {
         // Perform Google sign-in logic here
+    }
+
+    if (showSuccess) {
+        if (!showSuccess1) {
+            return <WaitlistPrompt updateShowSuccess1={updateShowSuccess1} />
+        }
+        return <SignupVerification />
     }
 
     return (
@@ -52,8 +93,9 @@ const SignUpPage = () => {
                             <Input
                                 type="text"
                                 id="firstName"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                name="firstName"
+                                value={formData.firstName}
+                                onChange={handleChange}
                             />
                         </Box>
                         <Box sx={{ flex: "1 1 auto" }}>
@@ -61,8 +103,9 @@ const SignUpPage = () => {
                             <Input
                                 type="text"
                                 id="lastName"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                name="lastName"
+                                value={formData.lastName}
+                                onChange={handleChange}
                             />
                         </Box>
                     </Flex>
@@ -71,8 +114,9 @@ const SignUpPage = () => {
                         <Input
                             type="email"
                             id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                         />
                     </Box>
                     <Button type="submit">Join waitlist</Button>
@@ -93,7 +137,7 @@ const SignUpPage = () => {
                 <Text as="p" sx={{ mt: 4, color: "dark_600", mb: "4px" }}>
                     Already a member?
                     <Link
-                        href="/login"
+                        href="/"
                         sx={{
                             textDecoration: "none",
                             color: "dark_600",

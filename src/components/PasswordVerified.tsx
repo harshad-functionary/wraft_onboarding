@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { Flex, Box, Heading, Button, Link } from "theme-ui"
-import Verified from "../../public/Social 01 1.svg"
+import CheckSuccess from "../../public/check-success.svg"
 
-const EmailVerified = () => {
+const PasswordVerified = () => {
     return (
         <Box
             as="main"
@@ -13,17 +13,16 @@ const EmailVerified = () => {
                 sx={{
                     flexDirection: "column",
                     alignItems: "center",
-                    pt: "103px",
+                    pt: "170px",
                 }}>
-                <Image src={Verified} alt="" className="" priority />
+                <Image src={CheckSuccess} alt="" className="" priority />
                 <Heading
                     as="h3"
                     variant="styles.h3"
-                    sx={{ mt: "88px", mb: "32px", color: "#363E49" }}>
-                    Your email is verified
+                    sx={{ mt: "127px", mb: "32px", color: "#363E49" }}>
+                    Password changed
                 </Heading>
-
-                <Link href="/login">
+                <Link href="/">
                     <Button>Go to login page</Button>
                 </Link>
             </Flex>
@@ -31,4 +30,4 @@ const EmailVerified = () => {
     )
 }
 
-export default EmailVerified
+export default PasswordVerified

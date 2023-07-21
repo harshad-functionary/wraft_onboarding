@@ -6,7 +6,7 @@ type NavItem = {
     linkRoute: string
 }
 
-const UserProfileNavitem = ({ items }: { items: NavItem[] }) => {
+const DashboardNavitem = ({ items }: { items: NavItem[] }) => {
     return (
         <Flex
             as="nav"
@@ -44,4 +44,4 @@ const UserProfileNavitem = ({ items }: { items: NavItem[] }) => {
     )
 }
 
-export default UserProfileNavitem
+export default DashboardNavitem

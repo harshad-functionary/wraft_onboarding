@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Input, Avatar, Text, Grid } from "theme-ui"
-import UserProfileNavitem from "@/components/UserProfileNavitem"
+import DashboardNavitem from "@/components/DashboardNavitem"
 import Frame from "../../public/Frame.svg"
 import Light from "../../public/Dark-Light.svg"
 import Image from "next/image"
 import SearchIcon from "../../public/SearchDocument.svg"
 import NotificationIcon from "../../public/Notification.svg"
 import { useState, ChangeEvent } from "react"
-import UserProfileCard from "@/components/UserProfileCard"
+import DahboardTemplate from "@/components/DashboardTemplate"
 
 type propCardItem = {
     content: string
@@ -33,7 +33,7 @@ const userCards = [
     { content: "NDA", color: "primary_500" },
 ]
 
-const IndexPage = () => {
+const Dashboard = () => {
     const [searchValue, setSearchValue] = useState("")
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,12 +58,12 @@ const IndexPage = () => {
                     <Image src={Frame} alt="Logo" priority />
                 </Box>
 
-                <UserProfileNavitem items={navItems} />
+                <DashboardNavitem items={navItems} />
                 <Box sx={{ mt: "32px", ml: "32px" }}>
                     <Image src={Light} alt="Logo" />
                 </Box>
             </Box>
-            <Flex as="section" sx={{ width: "100%", flexDirection: "column" }}>
+            <Flex as="section" sx={{ flexGrow: 1, flexDirection: "column" }}>
                 <Box
                     as="header"
                     sx={{
@@ -140,6 +140,7 @@ const IndexPage = () => {
                     as="main"
                     sx={{
                         display: "flex",
+                        width: "70%",
                         flexDirection: "column",
                         px: "48px",
                         py: "26px",
@@ -161,7 +162,7 @@ const IndexPage = () => {
                             flex: "none",
                         }}>
                         {userCards.map((item: propCardItem, index: number) => (
-                            <UserProfileCard key={index} items={item} />
+                            <DahboardTemplate key={index} items={item} />
                         ))}
                     </Grid>
                 </Box>
@@ -170,4 +171,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage
+export default Dashboard

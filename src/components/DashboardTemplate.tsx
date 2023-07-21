@@ -5,11 +5,10 @@ type propCardItem = {
     color: string
 }
 
-const UserProfileCard = ({ items }: { items: propCardItem }) => {
+const DashboardTemplate = ({ items }: { items: propCardItem }) => {
     return (
         <Flex
             sx={{
-                width: "223px",
                 height: "128px",
                 flexDirection: "column",
                 border: "1px solid #E4E9EF",
@@ -46,4 +45,4 @@ const UserProfileCard = ({ items }: { items: propCardItem }) => {
     )
 }
 
-export default UserProfileCard
+export default DashboardTemplate

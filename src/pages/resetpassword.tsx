@@ -1,27 +1,42 @@
 import { useState } from "react"
-
+import PasswordVerified from "@/components/PasswordVerified"
 import Image from "next/image"
 import { Flex, Box, Heading, Label, Input, Button, Text, Grid } from "theme-ui"
 import Logo from "../../public/Logo.svg"
+import { useAppContext } from "../AppContext"
 
 const ResetPasswordPage = () => {
-    const [email, setEmail] = useState("")
+    const { commonState, updateCommonState } = useAppContext()
+    const { password, email } = commonState
+
+    const [email1, setEmail1] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+
     const [showFirstSection, setShowFirstSection] = useState(true)
+    const [verified, setVerified] = useState(false)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
+
+        if (isValidEmail(email1)) {
+            if (email === email1) {
+                setShowFirstSection(false)
+            } else {
+                alert("wrong email")
+            }
+        }
+    }
+    console.log(email)
+    const handleSubmit1 = (e: React.FormEvent) => {
         e.preventDefault()
 
-        if (isValidEmail(email)) {
-            setShowFirstSection(false)
+        if (validatePassword(newPassword, confirmPassword)) {
+            updateCommonState({ password: newPassword })
         }
-        // Perform ResetPassword logic here
-        // For simplicity, let's just navigate to a success page
     }
 
-    const isValidEmail = (email: string): boolean => {
+    const isValidEmail = (email1: string): boolean => {
         // Simple email validation using regular expression
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         return emailRegex.test(email)
@@ -32,6 +47,14 @@ const ResetPasswordPage = () => {
         confirmPassword: string
     ): boolean => {
         return newPassword === confirmPassword
+    }
+
+    const handleClick = () => {
+        setVerified(true)
+    }
+
+    if (verified) {
+        return <PasswordVerified />
     }
 
     return (
@@ -60,9 +83,9 @@ const ResetPasswordPage = () => {
                         <Label htmlFor="email">Enter your email</Label>
                         <Input
                             type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            id="email1"
+                            value={email1}
+                            onChange={(e) => setEmail1(e.target.value)}
                             mb={"24px"}
                         />
 
@@ -76,7 +99,7 @@ const ResetPasswordPage = () => {
                         Reset password
                     </Heading>
 
-                    <Box as="form" onSubmit={handleSubmit}>
+                    <Box as="form" onSubmit={handleSubmit1}>
                         <Label htmlFor="New password">New password</Label>
                         <Input
                             type="password"
@@ -97,7 +120,9 @@ const ResetPasswordPage = () => {
                             mb={"24px"}
                         />
 
-                        <Button type="submit">Reset password</Button>
+                        <Button type="submit" onClick={handleClick}>
+                            Reset password
+                        </Button>
                     </Box>
                 </Flex>
             )}
