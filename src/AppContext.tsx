@@ -1,3 +1,4 @@
+"use client"
 import React, { createContext, useState, useContext, ReactNode } from "react"
 
 // Define the type for the common state
