@@ -20,12 +20,15 @@ const theme: Theme & CustomVariantGroups = {
         success_600: "#00471A",
         dark_300: "text",
         dark_600: "#343E49",
+        dark_200: "#B1B5B9",
+        dark_400: "#6F777F",
         input_border: "#D7DDE9",
         info_400: "#007FA6",
         error_400: "#D33E60",
         warning_300: "#E3774C",
         warning_500: "#88472E",
-        primary_500: "#3748CF"
+        primary_500: "#3748CF",
+       
     },
     fonts: {
         body: "inter,sans-serif",
@@ -75,6 +78,18 @@ const theme: Theme & CustomVariantGroups = {
             fontWeight: "heading",
             lineHeight: "h5",
         },
+        h5_regular: {
+            fontSize: 3,
+            fontFamily: "heading",
+            fontWeight: "body",
+            lineHeight: "h5",
+        },
+        caption_medium: {
+            fontSize: "9.6px",
+            fontFamily: "heading",
+            fontWeight: "heading",
+            lineHeight: "15.36px",
+        },
     },
 
     // variants
@@ -121,6 +136,7 @@ const theme: Theme & CustomVariantGroups = {
             backgroundColor: "transparent",
             color: "inherit",
             padding: "0px",
+            margin: "0",
             border: "none",
             outline: "none",
             cursor: "pointer",
@@ -132,6 +148,10 @@ const theme: Theme & CustomVariantGroups = {
                 bg: "transparent"
             },
         }
+      },
+
+      borders: {
+        primary: "1px solid #E4E9EF",
       },
 
     images: {
