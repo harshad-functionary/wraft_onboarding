@@ -15,6 +15,7 @@ const theme: Theme & CustomVariantGroups = {
         text: "#8F959B",
         background: "#FFFFFF",
         primary: "#00471A",
+        success_100: "#9FE5B9",
         success_400: "#008932",
         success_500: "#006726",
         success_600: "#00471A",

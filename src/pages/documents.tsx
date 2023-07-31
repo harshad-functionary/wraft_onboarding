@@ -3,6 +3,7 @@ import FilterSearch from "../../public/documents_svg/Search toggle.svg"
 import Image from "next/image"
 import { useState, ChangeEvent } from "react"
 import SideBar from "@/components/SideBar"
+import DocumentHeader from "@/components/DocumentHeader"
 
 const navItems = [
     { name: "content", items: ["documents", "approvals"] },
@@ -26,6 +27,7 @@ const Dashboard = () => {
 
     return (
         <Flex as="section">
+            {/* sidebar */}
             <SideBar
                 handleInputChange={handleInputChange}
                 handleSearch={handleSearch}
@@ -33,45 +35,22 @@ const Dashboard = () => {
                 navItems={navItems}
             />
             <Flex as="section" sx={{ flexGrow: 1, flexDirection: "column" }}>
-                <Box
-                    as="header"
-                    sx={{
-                        py: "25px",
-                        pl: "32px",
-                        borderBottom: "1px solid #E4E9EF",
-                    }}>
-                    <Heading
-                        as="h5"
-                        variant="styles.h5_regular"
-                        sx={{ color: "dark_600" }}>
-                        All documents
-                    </Heading>
-                </Box>
+                {/* -----header---- */}
+                <DocumentHeader />
+                {/* -----main------ */}
                 <Box
                     as="main"
                     sx={{
                         display: "flex",
-                        width: "70%",
+                        width: "100%",
                         flexDirection: "column",
-                        px: "48px",
-                        py: "26px",
+                        px: "32px",
+                        pt: "32px",
+                        pb: "52px",
+                        backgroundColor: "#FAFBFC",
+                        height: "100vh",
                     }}>
-                    <Text
-                        as="p"
-                        sx={{
-                            fontWeight: "heading",
-                            color: "#363E49",
-                            mb: "18px",
-                        }}>
-                        Get started with templates
-                    </Text>
-                    <Grid
-                        sx={{
-                            gap: "24px",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                            justifyContent: "start",
-                            flex: "none",
-                        }}></Grid>
+                    <Flex></Flex>
                 </Box>
             </Flex>
         </Flex>

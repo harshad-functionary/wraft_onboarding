@@ -1,11 +1,17 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, SVGProps } from "react"
 import { Box, Button, Flex, Input, Text, NavLink } from "theme-ui"
 import AddDocument from "../../public/documents_svg/plus.svg"
 import CompanyLogo from "../../public/documents_svg/Group 184.svg"
 import UserAvatar from "../../public/documents_svg/Profile.svg"
 import InputSearch from "../../public/documents_svg/search.svg"
 import Image from "next/image"
-import { type } from "os"
+import Documents from "@/svg/Documents"
+import Approvals from "@/svg/Approvals"
+import Manage from "@/svg/Manage"
+import Pipelines from "@/svg/Pipeline"
+import Variants from "@/svg/Variants"
+import Templates from "@/svg/Templates"
+import { useRouter } from "next/router"
 
 type SidebarProps = {
     handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -13,12 +19,26 @@ type SidebarProps = {
     searchValue: string
     navItems: { name: string; items: string[] }[]
 }
+
+type SvgComponentType = React.ComponentType<SVGProps<SVGSVGElement>>
+type ComponentMapping = SvgComponentType[]
+
 const SideBar = ({
     handleInputChange,
     handleSearch,
     searchValue,
     navItems,
 }: SidebarProps) => {
+    const router = useRouter()
+    const currentPathname = router.pathname
+    const componentMapping1: ComponentMapping = [Documents, Approvals]
+    const componentMapping2: ComponentMapping = [
+        Templates,
+        Variants,
+        Pipelines,
+        Manage,
+    ]
+
     return (
         <Box
             as="nav"
@@ -140,33 +160,44 @@ const SideBar = ({
                         (
                             item: SidebarProps["navItems"][number]["items"][number],
                             index: number
-                        ) => (
-                            <NavLink
-                                key={index}
-                                href={`/${item}`}
-                                sx={{
-                                    padding: "4px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    width: "225.3px",
-                                    gap: "8px",
-                                }}>
-                                <Image
-                                    src={`/documents_svg/${item}.svg`}
-                                    alt="icon"
-                                    width={24}
-                                    height={24}
-                                />
-                                <Text
+                        ) => {
+                            const Component = componentMapping1[index]
+                            if (currentPathname === `/${item}`) {
+                                var bgColor = true
+                            } else {
+                                bgColor = false
+                            }
+                            return (
+                                <NavLink
+                                    key={index}
+                                    href={`/${item}`}
                                     sx={{
-                                        color: "dark_600",
-                                        fontWeight: "heading",
+                                        padding: "4px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        width: "100%",
+                                        borderRadius: "4px",
+                                        gap: "8px",
+                                        backgroundColor: bgColor
+                                            ? "rgba(159, 229, 185, 0.3)"
+                                            : "",
                                     }}>
-                                    {item.charAt(0).toUpperCase() +
-                                        item.slice(1)}
-                                </Text>
-                            </NavLink>
-                        )
+                                    {currentPathname !== `/${item}` ? (
+                                        <Component stroke="#8F959B" />
+                                    ) : (
+                                        <Component stroke="#008932" />
+                                    )}
+                                    <Text
+                                        sx={{
+                                            color: "dark_600",
+                                            fontWeight: "heading",
+                                        }}>
+                                        {item.charAt(0).toUpperCase() +
+                                            item.slice(1)}
+                                    </Text>
+                                </NavLink>
+                            )
+                        }
                     )}
                 </Flex>
             </Flex>
@@ -201,34 +232,43 @@ const SideBar = ({
                         (
                             item: SidebarProps["navItems"][number]["items"][number],
                             index: number
-                        ) => (
-                            <NavLink
-                                key={index}
-                                href={`/${item}`}
-                                sx={{
-                                    padding: "4px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    width: "225.3px",
-                                    gap: "8px",
-                                }}>
-                                <Image
-                                    src={`/documents_svg/${item}.svg`}
-                                    alt="icon"
-                                    width={24}
-                                    height={24}
-                                    color="blue"
-                                />
-                                <Text
+                        ) => {
+                            const Component = componentMapping2[index]
+                            if (currentPathname === `/${item}`) {
+                                var bgColor = true
+                            } else {
+                                bgColor = false
+                            }
+                            return (
+                                <NavLink
+                                    key={index}
+                                    href={`/${item}`}
                                     sx={{
-                                        color: "dark_600",
-                                        fontWeight: "heading",
+                                        padding: "4px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        width: "225.3px",
+                                        gap: "8px",
+                                        backgroundColor: bgColor
+                                            ? "rgba(159, 229, 185, 0.3)"
+                                            : "",
                                     }}>
-                                    {item.charAt(0).toUpperCase() +
-                                        item.slice(1)}
-                                </Text>
-                            </NavLink>
-                        )
+                                    {currentPathname !== `/${item}` ? (
+                                        <Component stroke="#8F959B" />
+                                    ) : (
+                                        <Component stroke="#008932" />
+                                    )}
+                                    <Text
+                                        sx={{
+                                            color: "dark_600",
+                                            fontWeight: "heading",
+                                        }}>
+                                        {item.charAt(0).toUpperCase() +
+                                            item.slice(1)}
+                                    </Text>
+                                </NavLink>
+                            )
+                        }
                     )}
                 </Flex>
                 {/* button */}
