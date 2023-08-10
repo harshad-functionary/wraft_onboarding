@@ -4,18 +4,10 @@ import FilterIcon from "../../public/documents_svg/Filter 2.svg"
 import SortIcon from "../../public/documents_svg/Sort 2.svg"
 import Image from "next/image"
 import { useState, ChangeEvent } from "react"
-import SideBar from "@/components/SideBar"
-import DocumentHeader from "@/components/DocumentHeader"
-import DocumentTable from "@/components/DocumentTable"
-
-interface DocumentItem {
-    name: string
-    category: string
-    colorCode: string
-    date: string
-    editedBy: string
-    state: string
-}
+import MockData from "./../components/documents/Mock_Data.json"
+import SideBar from "@/components/documents/SideBar"
+import DocumentHeader from "@/components/documents/DocumentHeader"
+import DocumentTable from "@/components/documents/DocumentTable"
 
 const navItems = [
     { name: "content", items: ["documents", "approvals"] },
@@ -25,53 +17,9 @@ const navItems = [
     },
 ]
 
-const documents: DocumentItem[] = [
-    {
-        name: "EXT001",
-        category: "Exit Note",
-        colorCode: "info_400",
-        date: "2023-08-01",
-        editedBy: "User A",
-        state: "Pending",
-    },
-    {
-        name: "Document 2",
-        date: "2023-07-30",
-        editedBy: "User B",
-        state: "Approved",
-    },
-    {
-        name: "Document 3",
-        date: "2023-07-28",
-        editedBy: "User C",
-        state: "Rejected",
-    },
-    {
-        name: "Document 4",
-        date: "2023-07-25",
-        editedBy: "User A",
-        state: "Pending",
-    },
-]
-
-const Dashboard = () => {
+const Documents: React.FC = () => {
     const [searchValue, setSearchValue] = useState("")
-    // const [selectedFilter, setSelectedFilter] = useState<string>("") // You can initialize with default values
-    // const [selectedSort, setSelectedSort] = useState<string>("") // You can initialize with default values
-
-    // // Options for the filter and sort dropdowns
-    // const filterOptions: string[] = ["Option 1", "Option 2", "Option 3"]
-    // const sortOptions: string[] = ["Option A", "Option B", "Option C"]
-
-    // const handleFilterChange = (
-    //     event: ChangeEvent<HTMLSelectElement>
-    // ): void => {
-    //     setSelectedFilter(event.target.value)
-    // }
-
-    // const handleSortChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    //     setSelectedSort(event.target.value)
-    // }
+    const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false)
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value)
@@ -80,6 +28,10 @@ const Dashboard = () => {
     const handleSearch = () => {
         // Perform search logic with the searchValue
         console.log("Search for:", searchValue)
+    }
+
+    const handleFilterButtonClick = () => {
+        setIsFilterDropdownOpen(!isFilterDropdownOpen)
     }
 
     return (
@@ -113,7 +65,8 @@ const Dashboard = () => {
                         sx={{
                             maxHeight: "32px",
                             alignItems: "center",
-                            marginBottom: "19px",
+                            marginBottom: "18px",
+                            position: "relative",
                         }}>
                         <Button
                             sx={{
@@ -126,7 +79,8 @@ const Dashboard = () => {
                                 pl: "11px",
                                 pr: "13px",
                                 margin: "0px",
-                            }}>
+                            }}
+                            onClick={handleFilterButtonClick}>
                             <Flex sx={{ gap: "8px" }}>
                                 <Image src={FilterIcon} alt="" />
                                 <Text
@@ -170,12 +124,28 @@ const Dashboard = () => {
                                 alt="click to search Documents"
                             />
                         </Button>
+                        {isFilterDropdownOpen && (
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    top: "100%",
+                                    left: 0,
+                                    width: "100%", // Set the width to 100% of the parent container
+                                    background: "#fff",
+                                    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                                    zIndex: 1,
+                                }}>
+                                {/* Content of the dropdown */}
+                                {/* You can add your dropdown content here */}
+                                hi
+                            </Box>
+                        )}
                     </Flex>
-                    <DocumentTable documents={documents} />
+                    <DocumentTable data={MockData} />
                 </Box>
             </Flex>
         </Flex>
     )
 }
 
-export default Dashboard
+export default Documents

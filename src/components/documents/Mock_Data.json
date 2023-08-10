@@ -1,0 +1,119 @@
+[
+    {   "id": "1",
+        "name": "NDA001",
+        "category": "NDA",
+        "colorCode": "primary_500",
+        "date": "August 1, 2023",
+        "editedBy": "User A",
+        "editorAvatar": "user-a-avatar.jpg",
+        "state": "Pending"
+    },
+    {   "id": "2",
+        "name": "RLV001",
+        "category": "Relieving Letter",
+        "colorCode": "success_400",
+        "date": "August 2, 2023",
+        "editedBy": "User B",
+        "editorAvatar": "user-b-avatar.jpg",
+        "state": "Approved"
+    },
+    {   "id": "3",
+        "name": "EXT001",
+        "category": "Exit Note",
+        "colorCode": "info_400",
+        "date": "August 3, 2023",
+        "editedBy": "User C",
+        "editorAvatar": "user-c-avatar.jpg",
+        "state": "Draft"
+    },
+    {
+        "id": "4",
+        "name": "BRND001",
+        "category": "Branding Proposal",
+        "colorCode": "error_400",
+        "date": "August 4, 2023",
+        "editedBy": "User D",
+        "editorAvatar": "user-d-avatar.jpg",
+        "state": "Draft"
+    },
+    {
+        "id": "5",
+        "name": "EXT002",
+        "category": "Exit Note",
+        "colorCode": "info_400",
+        "date": "August 6, 2023",
+        "editedBy": "User F",
+        "editorAvatar": "user-f-avatar.jpg",
+        "state": "Approved"
+    },
+    {
+        "id": "6",
+        "name": "NDA002",
+        "category": "NDA",
+        "colorCode": "primary_500",
+        "date": "August 7, 2023",
+        "editedBy": "User G",
+        "editorAvatar": "user-g-avatar.jpg",
+        "state": "Pending"
+    },
+    {
+        "id": "7",
+        "name": "NDA003",
+        "category": "NDA",
+        "colorCode": "primary_500",
+        "date": "August 8, 2023",
+        "editedBy": "User H",
+        "editorAvatar": "user-h-avatar.jpg",
+        "state": "Approved"
+    },
+    {
+        "id": "8",
+        "name": "EXT003",
+        "category": "Exit Note",
+        "colorCode": "info_400",
+        "date": "August 9, 2023",
+        "editedBy": "User I",
+        "editorAvatar": "user-i-avatar.jpg",
+        "state": "Pending"
+    },
+    {
+        "id": "9",
+        "name": "OFFL001",
+        "category": "Offer Letter",
+        "colorCode": "warning_300",
+        "date": "August 15, 2023",
+        "editedBy": "User O",
+        "editorAvatar": "user-o-avatar.jpg",
+        "state": "Draft"
+    },
+    {
+        "id": "10",
+        "name": "OFFL002",
+        "category": "Offer Letter",
+        "colorCode": "warning_300",
+        "date": "August 16, 2023",
+        "editedBy": "User P",
+        "editorAvatar": "user-p-avatar.jpg",
+        "state": "Approved"
+    },
+    {
+        "id": "11",
+        "name": "EXT004",
+        "category": "Exit Note",
+        "colorCode": "info_400",
+        "date": "August 9, 2023",
+        "editedBy": "User I",
+        "editorAvatar": "user-i-avatar.jpg",
+        "state": "Pending"
+    },
+    {
+        "id": "12",
+        "name": "SBR001",
+        "category": "Simple Board Resolution",
+        "colorCode": "info_200",
+        "date": "August 14, 2023",
+        "editedBy": "User N",
+        "editorAvatar": "user-n-avatar.jpg",
+        "state": "Approved"
+    }
+]
