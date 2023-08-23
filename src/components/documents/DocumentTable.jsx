@@ -2,7 +2,6 @@
 
 import React, { useMemo } from "react"
 import { useTable, usePagination } from "react-table"
-import MockData from "./Mock_Data.json"
 import { Columns } from "./Columns"
 
 // interface DataItem {
@@ -35,7 +34,7 @@ const TableComponent = ({ data }) => {
     return (
         <div>
             <table {...getTableProps()} sx={{width: "100%", borderCollapse: "collapse", border: "1px solid #E4E9EF"}}>
-                <thead sx={{height: "42px", borderBottom: "1px solid #E4E9EF"}}>
+                <thead sx={{height: "42px",bg: "#FFFFFF", borderBottom: "1px solid #E4E9EF"}}>
                     {headerGroups.map((headerGroup) => (
                         <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id} style={{ textAlign: "left" }}>
                             {headerGroup.headers.map((column) => (
@@ -50,11 +49,20 @@ const TableComponent = ({ data }) => {
                     {page.map((row) => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()} key={row.id} sx={{height: "70px"}}>
+                            <tr {...row.getRowProps()} key={row.id} 
+                            sx={{height: "70px",
+                                ":nth-of-type(even)": {
+                                    bg: "#F9FAFB;", // Apply style for even rows
+                                },
+                                ":nth-of-type(odd)": {
+                                    bg: "#FFFFFF", // Apply style for odd rows
+                                },
+                            }}>
                                 {row.cells.map((cell) => {
                                     return (
                                         <td {...cell.getCellProps()} key={cell.column.id}>
                                             {cell.render("Cell")}
+                                           
                                         </td>
                                     )
                                 })}
@@ -73,12 +81,8 @@ const TableComponent = ({ data }) => {
                   Last{">>"}
                 </button>
                 </div>
-                
-                <div sx={{ marginLeft: "auto" }}>
-                    Page{" "}
-                    <strong>
-                        {pageIndex + 1} of {pageOptions.length}
-                    </strong>{" "}
+                <div sx={{ marginLeft: "auto", fontSize: "12px", lineHeight: "19.2px", fontWeight: "heading", color: "dark_400"}}>
+                  <p>Showing{" "}{pageIndex + 1} of {pageOptions.length}</p>  
                 </div>
              </div>
         </div>

@@ -25,6 +25,7 @@ const theme: Theme & CustomVariantGroups = {
         dark_400: "#6F777F",
         input_border: "#D7DDE9",
         info_400: "#007FA6",
+        info_200: "#41C3E9",
         error_400: "#D33E60",
         warning_300: "#E3774C",
         warning_500: "#88472E",
