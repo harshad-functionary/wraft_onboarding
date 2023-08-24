@@ -3,6 +3,7 @@
 import React, { useMemo } from "react"
 import { useTable, usePagination } from "react-table"
 import { Columns } from "./Columns"
+import Link from "next/link"
 
 // interface DataItem {
 //     name: string
@@ -49,8 +50,10 @@ const TableComponent = ({ data }) => {
                     {page.map((row) => {
                         prepareRow(row)
                         return (
-                            <tr {...row.getRowProps()} key={row.id} 
+                            // <Link key={row.id} href={"#"} sx={{display: "table-row"}}>
+                            <tr {...row.getRowProps()} key={row.id}  
                             sx={{height: "70px",
+                                display: "table-row",
                                 ":nth-of-type(even)": {
                                     bg: "#F9FAFB;", // Apply style for even rows
                                 },
@@ -58,15 +61,17 @@ const TableComponent = ({ data }) => {
                                     bg: "#FFFFFF", // Apply style for odd rows
                                 },
                             }}>
+                                
                                 {row.cells.map((cell) => {
-                                    return (
-                                        <td {...cell.getCellProps()} key={cell.column.id}>
+                                    return ( 
+                                        <td {...cell.getCellProps()} key={cell.column.id} >
                                             {cell.render("Cell")}
-                                           
-                                        </td>
+                                        </td>  
                                     )
                                 })}
+                                
                             </tr>
+                            // </Link>
                         )
                     })}
                 </tbody>
