@@ -9,8 +9,12 @@ const NewDocument = () => {
                 display: "flex",
                 flexDirection: "column",
                 width: "582px",
-                height: "100%",
+                height: "100vh",
                 backgroundColor: "#FFF",
+                position: "absolute",
+                top: "0",
+                right: "0",
+                zIndex: "15",
             }}>
             <Text>New document</Text>
         </Box>

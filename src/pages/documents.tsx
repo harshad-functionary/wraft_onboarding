@@ -70,7 +70,7 @@ const Documents: React.FC = () => {
     }
 
     const uniqueCategories: string[] = [
-        ...new Set(MockData.map((item) => item.category)),
+        ...new Set(MockData.map((item) => item.name.category)),
     ].sort()
 
     return (

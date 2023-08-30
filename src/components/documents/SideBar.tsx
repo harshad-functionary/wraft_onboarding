@@ -1,4 +1,4 @@
-import { ChangeEvent, SVGProps } from "react"
+import { ChangeEvent, SVGProps, useState } from "react"
 import { Box, Button, Flex, Input, Text, NavLink } from "theme-ui"
 import AddDocument from "../../../public/documents_svg/plus.svg"
 import CompanyLogo from "../../../public/documents_svg/Group 184.svg"
@@ -12,6 +12,7 @@ import Pipelines from "@/svg/Pipeline"
 import Variants from "@/svg/Variants"
 import Templates from "@/svg/Templates"
 import { useRouter } from "next/router"
+import NewDocument from "./NewDocument"
 
 type SidebarProps = {
     handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -38,6 +39,14 @@ const SideBar = ({
         Pipelines,
         Manage,
     ]
+    const [isNewDocOpen, setIsNewDocOpen] = useState(false)
+
+    const newDocModalOpen = () => {
+        setIsNewDocOpen(true)
+    }
+    const newDocModalClose = () => {
+        setIsNewDocOpen(false)
+    }
 
     return (
         <Box
@@ -273,6 +282,7 @@ const SideBar = ({
                 </Flex>
                 {/* button */}
                 <Button
+                    onClick={newDocModalOpen}
                     sx={{
                         alignSelf: "center",
                         py: "9px",
@@ -285,6 +295,7 @@ const SideBar = ({
                     </Flex>
                 </Button>
             </Flex>
+            {isNewDocOpen && <NewDocument />}
         </Box>
     )
 }
