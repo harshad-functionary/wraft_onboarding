@@ -20,7 +20,7 @@ import Button from "../Components/Button"
 // }
 
 const TableComponent = ({ data }) => {
-    const columns = useMemo(() => Columns, [])
+    
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     
@@ -32,12 +32,13 @@ const TableComponent = ({ data }) => {
     const toggleModalClose = () => {
         setIsModalOpen(false);
     }
-
+    
+   const columns = useMemo(() => Columns(toggleModalOpen), [])
+    console.log(columns)
    
-    const bgColorMapping = {
-        Approved: "rgba(159, 229, 185, 0.50)",
-        Draft: "rgba(251, 204, 185, 0.50)",
-        Pending: "rgba(208, 212, 244, 0.50)"
+
+    const rowId = (id)=>{
+        console.log(id)
     }
 
 
@@ -83,28 +84,27 @@ const TableComponent = ({ data }) => {
                                 ":nth-of-type(odd)": {
                                     bg: "#FFFFFF", // Apply style for odd rows
                                 },
-                            }}>
-                                
+                            }} 
+                            onClick={()=> rowId(row.id)}>
                                 {row.cells.map((cell) => {
                                     return ( 
-                                        <td {...cell.getCellProps()} key={cell.column.id} >
-                                            { (cell.column.id !== "state" ) &&
-                                                cell.render("Cell")
-                                            }
-                                            { (cell.column.id === "state" ) &&
-                                                 <div sx={{display: "flex",marginRight: "28px", alignItems: "center"}}>
-                                                 <p sx={{marginRight: "auto", p: "2px 10px", borderRadius: "12px",bg: `${bgColorMapping[row.original.state]}`}}>{row.original.state}</p>
-                                                 {/* <button onClick={toggleModal} ><Image src={Delete} alt=""/></button> */}
-                                                 <Button  border="none"
-                                                    onClick={toggleModalOpen}
-                                                    ><Image src={Delete} alt=""/>
-                                                </Button>
-                                             </div>
-                                            }
-                                        </td>  
+                                        // <td {...cell.getCellProps()} key={cell.column.id} >
+                                        //     { (cell.column.id !== "state" ) &&
+                                        //         cell.render("Cell")
+                                        //     }
+                                        //     { (cell.column.id === "state" ) &&
+                                        //          <div sx={{display: "flex",marginRight: "28px", alignItems: "center"}}>
+                                        //          <p sx={{marginRight: "auto", p: "2px 10px", borderRadius: "12px",bg: `${bgColorMapping[row.original.state]}`}}>{row.original.state}</p>
+                                        //          {/* <button onClick={toggleModal} ><Image src={Delete} alt=""/></button> */}
+                                        //          <Button  border="none"
+                                        //             onClick={toggleModalOpen}
+                                        //             ><Image src={Delete} alt=""/>
+                                        //         </Button>
+                                        //      </div>}
+                                        // </td>  
+                                        <td {...cell.getCellProps()} key={cell.column.id} > {cell.render("Cell")}</td>
                                     )
                                 })}
-                                
                             </tr>
                             // </Link>
                         )

@@ -3,7 +3,13 @@ import TableNameCell from "./TableNameCell"
 import Image from "next/image"
 import Delete from "../../../public/documents_svg/DocumentDelete.svg"
 
-export const Columns = [
+const bgColorMapping = {
+    Approved: "rgba(159, 229, 185, 0.50)",
+    Draft: "rgba(251, 204, 185, 0.50)",
+    Pending: "rgba(208, 212, 244, 0.50)"
+}
+
+export const Columns =(toggleModalOpen)=> [
     {
         Header: "Name",
         accessor: "name",
@@ -36,6 +42,13 @@ export const Columns = [
     {
         Header: "State",
         accessor: "state",
-       
+        Cell: ({row}) => {
+            return(
+                <div sx={{display: "flex",marginRight: "28px", alignItems: "center"}}>
+                <p sx={{marginRight: "auto", p: "2px 10px", borderRadius: "12px",bg: `${bgColorMapping[row.original.state]}`}}>{row.original.state}</p>
+                <button onClick={toggleModalOpen} ><Image src={Delete} alt=""/></button>
+                </div>
+            )
+        }
     },
 ]

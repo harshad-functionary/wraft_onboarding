@@ -82,7 +82,9 @@ const Documents: React.FC = () => {
                 searchValue={searchValue}
                 navItems={navItems}
             />
-            <Flex as="section" sx={{ flexGrow: 1, flexDirection: "column" }}>
+            <Flex
+                as="section"
+                sx={{ flexGrow: 1, flexDirection: "column", height: "100vh" }}>
                 {/* -----header---- */}
 
                 <DocumentHeader />
@@ -98,7 +100,7 @@ const Documents: React.FC = () => {
                         pt: "32px",
                         pb: "52px",
                         backgroundColor: "#FAFBFC",
-                        height: "100vh",
+                        height: "100%",
                     }}>
                     <Flex
                         as="section"
