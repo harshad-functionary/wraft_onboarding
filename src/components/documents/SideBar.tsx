@@ -1,5 +1,7 @@
+/** @jsxImportSource theme-ui */
+
 import { ChangeEvent, SVGProps, useState } from "react"
-import { Box, Button, Flex, Input, Text, NavLink } from "theme-ui"
+import { Box, Button, Flex, Input, Text } from "theme-ui"
 import AddDocument from "../../../public/documents_svg/plus.svg"
 import CompanyLogo from "../../../public/documents_svg/Group 184.svg"
 import UserAvatar from "../../../public/documents_svg/Profile.svg"
@@ -13,8 +15,9 @@ import Variants from "@/svg/Variants"
 import Templates from "@/svg/Templates"
 import { useRouter } from "next/router"
 import NewDocument from "./NewDocument"
+import Link from "next/link"
 
-type SidebarProps = {
+export type SidebarProps = {
     handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void
     handleSearch: () => void
     searchValue: string
@@ -177,13 +180,14 @@ const SideBar = ({
                                 bgColor = false
                             }
                             return (
-                                <NavLink
+                                <Link
                                     key={index}
                                     href={`/${item}`}
                                     sx={{
                                         padding: "4px",
                                         display: "flex",
                                         alignItems: "center",
+                                        textDecoration: "none",
                                         width: "100%",
                                         borderRadius: "4px",
                                         gap: "8px",
@@ -204,7 +208,7 @@ const SideBar = ({
                                         {item.charAt(0).toUpperCase() +
                                             item.slice(1)}
                                     </Text>
-                                </NavLink>
+                                </Link>
                             )
                         }
                     )}
@@ -249,7 +253,7 @@ const SideBar = ({
                                 bgColor = false
                             }
                             return (
-                                <NavLink
+                                <Link
                                     key={index}
                                     href={`/${item}`}
                                     sx={{
@@ -258,6 +262,7 @@ const SideBar = ({
                                         alignItems: "center",
                                         width: "225.3px",
                                         gap: "8px",
+                                        textDecoration: "none",
                                         backgroundColor: bgColor
                                             ? "rgba(159, 229, 185, 0.3)"
                                             : "",
@@ -275,7 +280,7 @@ const SideBar = ({
                                         {item.charAt(0).toUpperCase() +
                                             item.slice(1)}
                                     </Text>
-                                </NavLink>
+                                </Link>
                             )
                         }
                     )}

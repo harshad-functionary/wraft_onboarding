@@ -14,6 +14,8 @@ import SideBar from "@/components/documents/SideBar"
 import DocumentHeader from "@/components/documents/DocumentHeader"
 import DocumentTable from "@/components/documents/DocumentTable"
 import FilterDropdown from "@/components/documents/FilterDropdown"
+import Layout from "@/components/documents/layout"
+import { SidebarProps } from "@/components/documents/SideBar"
 
 const navItems = [
     { name: "content", items: ["documents", "approvals"] },
@@ -69,19 +71,23 @@ const Documents: React.FC = () => {
         }))
     }
 
+    const sidebarProps: SidebarProps = {
+        handleInputChange: () => {
+            handleInputChange
+        },
+        handleSearch: () => {
+            handleSearch
+        },
+        searchValue: searchValue,
+        navItems: navItems,
+    }
+
     const uniqueCategories: string[] = [
         ...new Set(MockData.map((item) => item.name.category)),
     ].sort()
 
     return (
-        <Flex as="section">
-            {/* sidebar */}
-            <SideBar
-                handleInputChange={handleInputChange}
-                handleSearch={handleSearch}
-                searchValue={searchValue}
-                navItems={navItems}
-            />
+        <Layout sidebarProps={sidebarProps}>
             <Flex
                 as="section"
                 sx={{ flexGrow: 1, flexDirection: "column", height: "100vh" }}>
@@ -274,7 +280,7 @@ const Documents: React.FC = () => {
                     <DocumentTable data={MockData} />
                 </Box>
             </Flex>
-        </Flex>
+        </Layout>
     )
 }
 

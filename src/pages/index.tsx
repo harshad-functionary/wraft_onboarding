@@ -1,8 +1,9 @@
-import { useState } from "react"
-import { useAppContext } from "../AppContext"
-
+import { useState, useEffect } from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
 import Image from "next/image"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import {
     Flex,
     Box,
@@ -17,17 +18,56 @@ import {
 } from "theme-ui"
 import Logo from "../../public/Logo.svg"
 import GoogleLogo from "../../public/GoogleLogo.svg"
+import { parse } from "cookie"
 
 const LoginPage = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [accessToken1, setAccessToken1] = useState<string | undefined>(
+        undefined
+    )
+
+    useEffect(() => {
+        // Retrieve the access token from the cookie
+        const token = Cookies.get("access_token")
+        console.log("info: token - ", token)
+        if (token) {
+            // If the access token exists in the cookie, set it in the state
+            router.push("/dashboard")
+            setAccessToken1(token)
+        }
+    }, [])
+
+    const [email, setEmail] = useState("shijith.k@aurut.com")
+    const [password, setPassword] = useState("pa55w0rd")
+    const router = useRouter()
+
+    const endpointUrl = "https://api.dev.wraft.co/api/v1/users/signin"
 
     // const { commonState, setCommonState } = useAppContext()
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Perform signup logic here
-        // For simplicity, let's just navigate to a success page
+        const payload = {
+            password: password,
+            email: email,
+        }
+
+        try {
+            const response = await axios.post(endpointUrl, payload)
+
+            const accessToken = response.data.access_token
+            const refreshToken = response.data.refresh_token
+
+            Cookies.set("access_token", accessToken, { expires: 2 / 24 }) // Set a 2-hour expiration time
+            Cookies.set("refresh_token", refreshToken, { expires: 2 }) // Set a 2-day expiration time
+
+            setAccessToken1(accessToken)
+
+            if (accessToken) {
+                router.push("/dashboard")
+            }
+        } catch (error) {
+            console.error("Error:", error)
+        }
     }
 
     const handleGoogleSignIn = () => {
@@ -93,6 +133,7 @@ const LoginPage = () => {
                             </Link>
                             <Button
                                 type="submit"
+                                onClick={handleSubmit}
                                 sx={{
                                     position: "absolute",
                                     mr: "auto",
@@ -137,6 +178,33 @@ const LoginPage = () => {
             </Grid>
         </>
     )
+}
+
+export async function getServerSideProps(context: any) {
+    // Access cookies using context.req.headers.cookie and parse it using 'cookies' library
+    const cookies = parse(context.req.headers.cookie || "")
+
+    // You can print the headers to the console
+    console.log("is there access_token in cookie set ? :", cookies.access_token)
+
+    // is 'token' there in cookie ?
+    //   Y : redirect to dashboard
+    //   N : do nothing
+
+    if (cookies.access_token) {
+        return {
+            redirect: {
+                destination: "/dashboard",
+                permanent: false,
+            },
+        }
+    }
+
+    return {
+        props: {
+            // Your props here...
+        },
+    }
 }
 
 export default LoginPage

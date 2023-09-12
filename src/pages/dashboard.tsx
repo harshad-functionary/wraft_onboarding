@@ -7,11 +7,15 @@ import SearchIcon from "../../public/SearchDocument.svg"
 import NotificationIcon from "../../public/Notification.svg"
 import { useState, ChangeEvent } from "react"
 import DahboardTemplate from "@/components/DashboardTemplate"
+import Cookies from "js-cookie"
+import { useRouter } from "next/router"
 
 type propCardItem = {
     content: string
     color: string
 }
+
+const token = Cookies.get("access_token")
 
 const navItems = [
     { name: "Documents", linkRoute: "" },
@@ -33,16 +37,30 @@ const userCards = [
     { content: "NDA", color: "primary_500" },
 ]
 
+const authenticateUser = () => {
+    const isAuthenticated = !!Cookies.get("access_token")
+    // console.log(Cookies.get("access_token"))
+    return true
+}
+
 const Dashboard = () => {
     const [searchValue, setSearchValue] = useState("")
-
+    const router = useRouter()
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.target.value)
     }
+    // console.log(Cookies.get("access_token"))
 
     const handleSearch = () => {
         // Perform search logic with the searchValue
         console.log("Search for:", searchValue)
+    }
+
+    const logoutHandle = () => {
+        // Remove the "access_token" cookie
+        Cookies.remove("access_token")
+        Cookies.remove("refresh_token")
+        router.push("/")
     }
 
     return (
@@ -62,6 +80,7 @@ const Dashboard = () => {
                 <Box sx={{ mt: "32px", ml: "32px" }}>
                     <Image src={Light} alt="Logo" />
                 </Box>
+                <Button onClick={logoutHandle}>Logout</Button>
             </Box>
             <Flex as="section" sx={{ flexGrow: 1, flexDirection: "column" }}>
                 <Box
@@ -169,6 +188,21 @@ const Dashboard = () => {
             </Flex>
         </Flex>
     )
+}
+
+export async function getServerSideProps(context: any) {
+    const isAuthenticated = authenticateUser()
+    if (!isAuthenticated) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            },
+        }
+    }
+    return {
+        props: {},
+    }
 }
 
 export default Dashboard
