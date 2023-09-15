@@ -9,6 +9,7 @@ import { useState, ChangeEvent } from "react"
 import DahboardTemplate from "@/components/DashboardTemplate"
 import Cookies from "js-cookie"
 import { useRouter } from "next/router"
+import { parse } from "cookie"
 
 type propCardItem = {
     content: string
@@ -36,12 +37,6 @@ const userCards = [
     { content: "Offer Letter", color: "warning_500" },
     { content: "NDA", color: "primary_500" },
 ]
-
-const authenticateUser = () => {
-    const isAuthenticated = !!Cookies.get("access_token")
-    // console.log(Cookies.get("access_token"))
-    return true
-}
 
 const Dashboard = () => {
     const [searchValue, setSearchValue] = useState("")
@@ -191,8 +186,10 @@ const Dashboard = () => {
 }
 
 export async function getServerSideProps(context: any) {
-    const isAuthenticated = authenticateUser()
-    if (!isAuthenticated) {
+    // Access cookies using context.req.headers.cookie and parse it using 'cookie' library
+    const cookies = parse(context.req.headers.cookie || "")
+
+    if (cookies.access_token == undefined) {
         return {
             redirect: {
                 destination: "/",
@@ -200,8 +197,11 @@ export async function getServerSideProps(context: any) {
             },
         }
     }
+
     return {
-        props: {},
+        props: {
+            // Your props here...
+        },
     }
 }
 

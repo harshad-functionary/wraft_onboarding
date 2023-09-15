@@ -25,16 +25,16 @@ const LoginPage = () => {
         undefined
     )
 
-    useEffect(() => {
-        // Retrieve the access token from the cookie
-        const token = Cookies.get("access_token")
-        console.log("info: token - ", token)
-        if (token) {
-            // If the access token exists in the cookie, set it in the state
-            router.push("/dashboard")
-            setAccessToken1(token)
-        }
-    }, [])
+    // useEffect(() => {
+    //     // Retrieve the access token from the cookie
+    //     const token = Cookies.get("access_token")
+    //     console.log("info: token - ", token)
+    //     if (token) {
+    //         // If the access token exists in the cookie, set it in the state
+    //         router.push("/dashboard")
+    //         setAccessToken1(token)
+    //     }
+    // }, [])
 
     const [email, setEmail] = useState("shijith.k@aurut.com")
     const [password, setPassword] = useState("pa55w0rd")
@@ -183,13 +183,6 @@ const LoginPage = () => {
 export async function getServerSideProps(context: any) {
     // Access cookies using context.req.headers.cookie and parse it using 'cookies' library
     const cookies = parse(context.req.headers.cookie || "")
-
-    // You can print the headers to the console
-    console.log("is there access_token in cookie set ? :", cookies.access_token)
-
-    // is 'token' there in cookie ?
-    //   Y : redirect to dashboard
-    //   N : do nothing
 
     if (cookies.access_token) {
         return {
